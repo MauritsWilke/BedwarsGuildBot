@@ -1,0 +1,43 @@
+{
+    "bot": {
+        "name": "Bedwars Guild Bot",
+		"description": "The official Bedwars Guild Bot",
+        "defaultPrefix": "d!",
+		"version": "0.0.1"
+    },
+
+	"devs": [
+		{
+			"Name": "The Almighty One",
+			"IGN": "I_Like_Cats__",
+			"DiscordID": "378874450105466880"
+		},
+		{
+			"Name": "Riche",
+			"IGN": "toxicial",
+			"DiscordID": "544232186967228448"
+		}
+	],
+
+    "design": {
+        "colourScheme": {
+            "default": "#55FFFF",
+            "success": "#55FF55",
+            "error": "#FF5555"
+        },
+
+        "images": {
+            "success": "",
+            "failed": ""
+        },
+
+		"char": {
+			"error": "!",
+			"warning": "⚠"
+		}
+    },
+
+    "changelog": [
+		"The bot now exists!"
+	]
+}

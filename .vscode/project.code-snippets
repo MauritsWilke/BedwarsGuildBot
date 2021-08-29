@@ -1,0 +1,47 @@
+{
+	"JSDoc Param": {
+		"prefix": "@param",
+		"body": [
+			"@param {${1:Param Type}} ${2:Param name} ${3:Param Description}"
+		],
+		"description": "Param Template"
+	},
+	"Command Template": {
+		"prefix": "@command",
+		"body": [
+			"const Command = require(`../../utils/command`)",
+			"const Discord = require(`discord.js`)",
+			"",
+			"module.exports = class extends Command {",
+			"\tconstructor() {",
+			"\t\tsuper({",
+			"\t\t\tname: \"${1:${TM_FILENAME_BASE}}\",",
+			"\t\t\tdescription: \"${2:Command Description}\",",
+			"\t\t\taliases: [],",
+			"\t\t\tcategory: \"${3:Command Category}\",",
+			"\t\t\tusage: \"${4:Command Usage}\",",
+			"\t\t\texample: \"${5:Command Example}\",",
+			"\t\t\tsettings: {",
+			"\t\t\t\t\"locked\": ${6|true,false|},",
+			"\t\t\t\t\"devOnly\": ${7|true,false|},",
+			"\t\t\t\t\"cooldown\": ${8:Command Cooldown (ms)},",
+			"\t\t\t\t\"args\": [],",
+			"\t\t\t\t\"perms\": [],",
+			"\t\t\t}",
+			"\t\t})",
+			"\t}",
+			"",
+			"\t/**",
+			"\t * Params for command",
+			"\t * @param {string} message - The message of the user",
+			"\t * @param {string[]} args - The arguments of the message, does not include command",
+			"\t * @param {object} client - The client itself",
+			"\t*/",
+			"\tasync run(message, args, client) {",
+			"\t\t${9:// Command Code here}",
+			"\t}",
+			"}"
+		],
+		"description": "Command Template"
+	}
+}

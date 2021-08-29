@@ -1,0 +1,18 @@
+{
+    "main": "src/index.js",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "discord.js": "^13.1.0",
+        "dotenv": "^10.0.0",
+        "node-fetch": "^2.6.1"
+    },
+    "scripts": {
+        "setup": "npm run --silent startSetup",
+        "startSetup": "npm i && echo DISCORD_BOT_TOKEN=\"\" > .TEST && echo HYPIXEL_API_KEY=\"\" >> .TEST",
+        "poststartSetup": "echo[  && echo Add your own Discord Bot Token and Hypixel Api Key to the .env file before running \"npm run start\" && echo[",
+        "presimpleview": "echo[ > .vscode/settings.json",
+		"simpleview": "echo { \"files.exclude\": { \"node_modules/\": true,        \"package-lock.json\": true,        \".env\": false,        \"package.json\": true,        \"src/handlers\": true,        \"src/events\": true,        \"src/index.js\": true,        \".vscode/\": true,        \".utils/templates/\": true, }} >> .vscode/settings.json",
+		"simpleviewdisable": "echo[ > .vscode/settings.json",
+		"start": "node src/index.js"
+    }
+}

@@ -1,0 +1,147 @@
+{
+    "2": {
+        "Type_Name": "QUAKECRAFT",
+        "Database_Name": "Quake",
+        "Clean_Name": "Quake"
+    },
+    "3": {
+        "Type_Name": "WALLS",
+        "Database_Name": "Walls",
+        "Clean_Name": "Walls"
+    },
+    "4": {
+        "Type_Name": "PAINTBALL",
+        "Database_Name": "Paintball",
+        "Clean_Name": "Paintball"
+    },
+    "5": {
+        "Type_Name": "SURVIVAL_GAMES",
+        "Database_Name": "HungerGames",
+        "Clean_Name": "Blitz Survival Games"
+    },
+    "6": {
+        "Type_Name": "TNTGAMES",
+        "Database_Name": "TNTGames",
+        "Clean_Name": "TNT Games"
+    },
+    "7": {
+        "Type_Name": "VAMPIREZ",
+        "Database_Name": "VampireZ",
+        "Clean_Name": "VampireZ"
+    },
+    "13": {
+        "Type_Name": "WALLS3",
+        "Database_Name": "Walls3",
+        "Clean_Name": "Mega Walls"
+    },
+    "14": {
+        "Type_Name": "ARCADE",
+        "Database_Name": "Arcade",
+        "Clean_Name": "Arcade"
+    },
+    "17": {
+        "Type_Name": "ARENA",
+        "Database_Name": "Arena",
+        "Clean_Name": "Arena"
+    },
+    "20": {
+        "Type_Name": "UHC",
+        "Database_Name": "UHC",
+        "Clean_Name": "UHC Champions"
+    },
+    "21": {
+        "Type_Name": "MCGO",
+        "Database_Name": "MCGO",
+        "Clean_Name": "Cops and Crims"
+    },
+    "23": {
+        "Type_Name": "BATTLEGROUND",
+        "Database_Name": "Battleground",
+        "Clean_Name": "Warlords"
+    },
+    "24": {
+        "Type_Name": "SUPER_SMASH",
+        "Database_Name": "SuperSmash",
+        "Clean_Name": "Smash Heroes"
+    },
+    "25": {
+        "Type_Name": "GINGERBREAD",
+        "Database_Name": "GingerBread",
+        "Clean_Name": "Turbo Kart Racers"
+    },
+    "26": {
+        "Type_Name": "HOUSING",
+        "Database_Name": "Housing",
+        "Clean_Name": "Housing"
+    },
+    "51": {
+        "Type_Name": "SKYWARS",
+        "Database_Name": "SkyWars",
+        "Clean_Name": "SkyWars"
+    },
+    "52": {
+        "Type_Name": "TRUE_COMBAT",
+        "Database_Name": "TrueCombat",
+        "Clean_Name": "Crazy Walls"
+    },
+    "54": {
+        "Type_Name": "SPEED_UHC",
+        "Database_Name": "SpeedUHC",
+        "Clean_Name": "Speed UHC"
+    },
+    "55": {
+        "Type_Name": "SKYCLASH",
+        "Database_Name": "SkyClash",
+        "Clean_Name": "SkyClash"
+    },
+    "56": {
+        "Type_Name": "LEGACY",
+        "Database_Name": "LEGACY",
+        "Clean_Name": "Classic Games"
+    },
+    "57": {
+        "Type_Name": "PROTOTYPE",
+        "Database_Name": "Prototype",
+        "Clean_Name": "Prototype"
+    },
+    "58": {
+        "Type_Name": "BEDWARS",
+        "Database_Name": "Bedwars",
+        "Clean_Name": "Bed Wars"
+    },
+    "59": {
+        "Type_Name": "MURDER_MYSTERY",
+        "Database_Name": "MurderMystery",
+        "Clean_Name": "MurderMystery"
+    },
+    "60": {
+        "Type_Name": "BUILD_BATTLE",
+        "Database_Name": "BuildBattle",
+        "Clean_Name": "Build Battle"
+    },
+    "61": {
+        "Type_Name": "DUELS",
+        "Database_Name": "Duels",
+        "Clean_Name": "Duels"
+    },
+    "63": {
+        "Type_Name": "SKYBLOCK",
+        "Database_Name": "SkyBlock",
+        "Clean_Name": "SkyBlock"
+    },
+    "64": {
+        "Type_Name": "PIT",
+        "Database_Name": "Pit",
+        "Clean_Name": "Pit"
+    },
+    "65": {
+        "Type_Name": "REPLAY",
+        "Database_Name": "Replay",
+        "Clean_Name": "Replay"
+    },
+    "67": {
+        "Type_Name": "SMP",
+        "Database_Name": "SMP",
+        "Clean_Name": "SMP"
+    }
+}
