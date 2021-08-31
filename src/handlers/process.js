@@ -36,7 +36,7 @@ module.exports = (client) => {
 	});
 
 	process.on('warning', (warning) => {
-		console.log(chalk`{magenta ${warningChar} Warning: }`, warning.message);
+		console.log(chalk`{magenta ${config.design.char.warning} Warning: }`, warning.message);
 
 		// const newEmbed = new Discord.MessageEmbed()
 		// 	.setColor(config.design.colourScheme.error)

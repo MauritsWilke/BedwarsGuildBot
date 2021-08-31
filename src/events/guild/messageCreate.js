@@ -1,6 +1,7 @@
 const { Collection, MessageEmbed } = require("discord.js")
 const { getDevID } = require("../../utils/utils")
 const { bot: { defaultPrefix, name }, devs, design: { colourScheme } } = require('../../config.json')
+const { commandLocked } = require(`../../utils/templates/embedTemplates`)
 
 const cooldowns = new Map();
 
@@ -36,7 +37,29 @@ module.exports = async (client, message) => {
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	}
 
-	if (settings?.locked) return message.reply("This command is disabled, sorry");
+	if (settings?.locked) {
+		if (getDevID(devs).includes(message.author.id)) {
+			const msg = await message.reply({ embeds: [commandLocked] })
+			msg.react(`✅`).then(() => msg.react(`❌`))
+
+			const filter = (reaction, user) => {
+				return ['✅', `❌`].includes(reaction.emoji.name) && user.id === message.author.id;
+			};
+
+			msg.awaitReactions({ filter, max: 1, time: 10000, errors: [`time`] })
+				.then(collected => {
+					const reaction = collected.first();
+
+					if (reaction.emoji.name === `✅`) {
+						command.run(message, args, client)
+					}
+
+					msg.delete()
+				})
+			return
+		}
+		return message.reply("This command is disabled, sorry");
+	}
 	if (settings?.devOnly && !getDevID(devs).includes(message.author.id)) return message.reply("This command is exclusive to our dev team, sorry");
 
 	let missingPerms = []

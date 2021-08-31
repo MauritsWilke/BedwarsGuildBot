@@ -28,7 +28,10 @@
 
         "images": {
             "success": "",
-            "failed": ""
+            "failed": "",
+			"gamemodes": {
+				"bedwars": "https://hypixel.net/styles/hypixel-v2/images/game-icons/BedWars-64.png"
+			}
         },
 
 		"char": {
@@ -38,6 +41,7 @@
     },
 
     "changelog": [
-		"The bot now exists!"
+		"Eval was added",
+		"Map rotation commands"
 	]
 }

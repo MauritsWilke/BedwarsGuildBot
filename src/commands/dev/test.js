@@ -13,6 +13,7 @@ module.exports = class extends Command {
 			usage: "test",
 			example: "test",
 			settings: {
+				locked: true,
 				devOnly: false,
 				cooldown: 5000,
 				perms: [
