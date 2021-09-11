@@ -3,7 +3,8 @@
         "name": "Bedwars Guild Bot",
 		"description": "The official Bedwars Guild Bot",
         "defaultPrefix": "d!",
-		"version": "0.0.1"
+		"version": "0.0.1",
+		"inviteLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
 
 	"devs": [
@@ -37,6 +38,10 @@
 		"char": {
 			"error": "!",
 			"warning": "⚠"
+		},
+
+		"other": {
+			"bulletPoint": "`•`"
 		}
     },
 

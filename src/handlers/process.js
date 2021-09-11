@@ -6,7 +6,7 @@ const chalk = require(`chalk`)
 module.exports = (client) => {
 
 	process.on('exit', (code) => {
-		console.log(chalk`{bold.red ${config.design.char.error} Client shutting down with code:}`, `${code}`);
+		console.dlog(chalk`{bold.red ${config.design.char.error} Client shutting down with code:}`, `${code}`);
 
 		// const newEmbed = new Discord.MessageEmbed()
 		// 	.setColor(config.design.colourScheme.error)
@@ -20,9 +20,10 @@ module.exports = (client) => {
 		// })()
 	});
 
-	process.on('uncaughtException', (err, origin) => {
+	process.on('uncaughtException', async (err, origin) => {
 		console.log(chalk`{bold.red ${config.design.char.error} Origin:}`, `${err.stack}`);
 		console.log(chalk`{bold.red ${config.design.char.error} Error:}`, `${err}`);
+
 		// const newEmbed = new Discord.MessageEmbed()
 		// 	.setColor(config.design.colourScheme.error)
 		// 	.setTitle("Unsuspected Error ❗")
@@ -38,6 +39,8 @@ module.exports = (client) => {
 	process.on('warning', (warning) => {
 		console.log(chalk`{magenta ${config.design.char.warning} Warning: }`, warning.message);
 
+		const errorChannel = client.channels.cache.last()
+		errorChannel.send("Something went wrong bitch")
 		// const newEmbed = new Discord.MessageEmbed()
 		// 	.setColor(config.design.colourScheme.error)
 		// 	.setTitle("Warning ⚠")
