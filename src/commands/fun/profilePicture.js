@@ -4,7 +4,6 @@ const { getSkin } = require(`../../utils/api/mojang`)
 const { createCanvas, loadImage, Image } = require('canvas')
 const config = require(`../../config.json`)
 
-
 module.exports = class extends Command {
 	constructor() {
 		super({
@@ -39,7 +38,13 @@ module.exports = class extends Command {
 		ctx.scale(16, 16)
 		ctx.imageSmoothingEnabled = false;
 
-		// * CUSTOM GRADIENT
+		let selectedCosmetics = [];
+		const skinURL = await getSkin(args[0]);
+		const playerSkin = await loadImage(skinURL);
+		const purpleShadingImage = await loadImage(`src/images/profilePicture/20x20pshading.png`);
+		const backdropShading = await loadImage(`src/images/profilePicture/backdropshading.png`)
+
+		// _ CUSTOM GRADIENT
 		if (args[1] && args[2]) {
 			if (!args[1].match(/^[#0-9A-F]+$/i) || !args[2].match(/^[#0-9A-F]+$/i)) {
 				const errorEmbed = new MessageEmbed()
@@ -68,23 +73,17 @@ module.exports = class extends Command {
 			ctx.fillRect(0, 0, 20, 20);
 		}
 
-		const skinURL = await getSkin(args[0]);
-		const playerSkin = await loadImage(skinURL);
-		const purpleShadingImage = await loadImage(`src/images/profilePicture/20x20pshading.png`);
-		const backdropShading = await loadImage(`src/images/profilePicture/backdropshading.png`)
-
-		// * Backdrop Shading
+		// _ Backdrop Shading
 		args[4] == "false" ? null : ctx.drawImage(backdropShading, 0, 0, 20, 20);
 
+		// _ Drawing PLayer Skin (dont fucking touch this)
 		if (playerSkin.height === 32) {
 			ctx.drawImage(playerSkin, 8, 9, 7, 7, 8, 4, 7, 7); // Head (bottom layer)
 			ctx.drawImage(playerSkin, 5, 9, 3, 7, 5, 4, 3, 7); // Head Side (bottom layer)
-
 			ctx.drawImage(playerSkin, 44, 20, 3, 7, 12, 13, 3, 7); // Arm Right Side (bottom layer)
 			ctx.drawImage(playerSkin, 21, 20, 6, 1, 7, 11, 6, 1); // Chest Neck Small Line (bottom layer)
 			ctx.drawImage(playerSkin, 20, 21, 8, 8, 6, 12, 8, 8); // Chest Other (Bottom layer)
 			ctx.drawImage(playerSkin, 44, 20, 3, 7, 5, 13, 3, 7); // Arm Left Side (bottom layer)
-
 			ctx.drawImage(playerSkin, 40, 9, 7, 7, 8, 4, 7, 7); // Head (top layer)
 			ctx.drawImage(playerSkin, 33, 9, 3, 7, 5, 4, 3, 7); // Head Side (top layer)
 
@@ -106,79 +105,25 @@ module.exports = class extends Command {
 			ctx.drawImage(playerSkin, 21, 36, 6, 1, 7, 11, 6, 1); // Chest Neck Small Line (top layer)
 		}
 
-		// * ADDING SHADING
+		// _ ADDING SHADING
 		args[3] == "false" ? null : ctx.drawImage(purpleShadingImage, 0, 0, 20, 20);
 
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
 		const secondCanvas = createCanvas(canvas.width, canvas.height)
+
+		//_ Clone the first canvas for later resets
 		const secCtx = secondCanvas.getContext(`2d`)
 		secCtx.scale(16, 16)
 		secCtx.imageSmoothingEnabled = false;
 		secCtx.drawImage(canvas, 0, 0, 20, 20)
 
-		// * COSMETICS MENU
+		// _ COSMETICS MENU
 		const row = new MessageActionRow()
 			.addComponents(
 				new MessageSelectMenu()
 					.setCustomId('cosmeticSelect')
 					.setPlaceholder('Add cosmetics! (optional)')
-					.addOptions([
-						{
-							label: 'Monocle',
-							description: 'Where is my top hat, Albert? 🧐',
-							value: 'monocle',
-						},
-						{
-							label: 'Christmas Hat',
-							description: 'Ho Ho Ho never too early! 🎄',
-							value: 'christmasHat',
-						},
-						{
-							label: `Snow! ⛄`,
-							description: `Let it snow, let it snow, let it snow!`,
-							value: `snow`
-						},
-						{
-							label: `Cat Ears 😺`,
-							description: `Meow`,
-							value: `catears`
-						},
-						{
-							label: `Sunglasses! 😎`,
-							description: `Lookin extra cool today `,
-							value: `sunglasses`
-						},
-						{
-							label: `Cape!`,
-							description: `Coming to save the day! `,
-							value: `cape`
-						},
-						{
-							label: `Crown 👑`,
-							description: `King of Minecraft `,
-							value: `crown`
-						},
-						{
-							label: `I_Like_Cats__`,
-							description: `Just become I_Like_cats__ `,
-							value: `ilikecats`
-						},
-						{
-							label: `Greyscale filter!`,
-							description: `Colours are too OP `,
-							value: `greyscale`
-						},
-						{
-							label: `Top hat 🎩`,
-							description: `Found the top hat, Albert `,
-							value: `tophat`
-						},
-						{
-							label: `Reset ❌`,
-							description: `Reset to default`,
-							value: `reset`
-						},
-					]),
+					.addOptions(setCosmeticOptions(selectedCosmetics)),
 			);
 
 		const sendMessage = await message.channel.send({ files: [attachment], components: [row] })
@@ -187,12 +132,12 @@ module.exports = class extends Command {
 		collector.on(`collect`, async selection => {
 			if (selection.user.id !== message.author.id) return selection.reply({ content: "Only the executer of the command can use this!", ephemeral: true });
 
-			if (selection.values[0] == `reset`) {
-				ctx.drawImage(secondCanvas, 0, 0, 20, 20)
-				const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
-				await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` })
-				return
-			}
+			ctx.drawImage(secondCanvas, 0, 0, 20, 20)
+			const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
+
+
+			if (selection.values[0] == `reset`) return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` });
+
 			if (selection.values[0] == `greyscale`) {
 
 				let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
@@ -214,18 +159,100 @@ module.exports = class extends Command {
 				ctx.putImageData(imageData, 0, 0);
 				const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
 				await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` })
-				return
-
 			}
 
-			const cosmetic = await loadImage(`src/images/profilePicture/${selection.values[0]}.png`)
-			ctx.drawImage(cosmetic, 0, 0, 20, 20);
-			const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
-			await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` })
+			if (selectedCosmetics.includes(selection.values[0])) {
+				selectedCosmetics = selectedCosmetics.filter(v => v != selection.values[0])
+			} else {
+				selectedCosmetics.push(selection.values[0]);
+			}
+
+			const row = new MessageActionRow()
+				.addComponents(
+					new MessageSelectMenu()
+						.setCustomId('cosmeticSelect')
+						.setPlaceholder('Add cosmetics! (optional)')
+						.addOptions(setCosmeticOptions(selectedCosmetics)),
+				);
+
+			let drawnCosmetics = 0;
+			if (selectedCosmetics.length == 0) return sendUpdatedCanvas()
+			selectedCosmetics.forEach(async (selCos) => {
+				const cosmetic = await loadImage(`src/images/profilePicture/${selCos}.png`)
+				ctx.drawImage(cosmetic, 0, 0, 20, 20);
+				drawnCosmetics++
+				if (drawnCosmetics === selectedCosmetics.length) sendUpdatedCanvas()
+			})
+
+			async function sendUpdatedCanvas() {
+				const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
+				return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B`, components: [row] })
+			}
 		})
 
 		collector.on(`end`, () => {
 			sendMessage.edit({ components: [] })
 		})
 	}
+}
+
+function setCosmeticOptions(selectedCosmetics) {
+	cosmeticOptions = [
+		{
+			label: `${selectedCosmetics.includes("monocle") ? "❌ Remove" : ""} Monocle`,
+			description: 'Where is my top hat, Albert? 🧐',
+			value: 'monocle',
+		},
+		{
+			label: `${selectedCosmetics.includes("christmasHat") ? "❌ Remove" : ""} Christmas Hat`,
+			description: 'Ho Ho Ho never too early! 🎄',
+			value: 'christmasHat',
+		},
+		{
+			label: `${selectedCosmetics.includes("snow") ? "❌ Remove" : ""} Snow! ⛄`,
+			description: `Let it snow, let it snow, let it snow!`,
+			value: `snow`
+		},
+		{
+			label: `${selectedCosmetics.includes("catears") ? "❌ Remove" : ""} Cat Ears 😺`,
+			description: `Meow`,
+			value: `catears`
+		},
+		{
+			label: `${selectedCosmetics.includes("sunglasses") ? "❌ Remove" : ""} Sunglasses! 😎`,
+			description: `Lookin extra cool today `,
+			value: `sunglasses`
+		},
+		{
+			label: `${selectedCosmetics.includes("cape") ? "❌ Remove" : ""} Cape!`,
+			description: `Coming to save the day! `,
+			value: `cape`
+		},
+		{
+			label: ` ${selectedCosmetics.includes("crown") ? "❌ Remove" : ""} Crown 👑`,
+			description: `King of Minecraft `,
+			value: `crown`
+		},
+		{
+			label: `${selectedCosmetics.includes("ilikecats") ? "❌ Remove" : ""} I_Like_Cats__`,
+			description: `Just become I_Like_cats__ `,
+			value: `ilikecats`
+		},
+		{
+			label: `Greyscale filter!`,
+			description: `❗ Currently kinda broken Colours are too OP `,
+			value: `greyscale`
+		},
+		{
+			label: `${selectedCosmetics.includes("tophat") ? "❌ Remove" : ""} Top hat 🎩`,
+			description: `Found the top hat, Albert `,
+			value: `tophat`
+		},
+		{
+			label: `Reset ❌`,
+			description: `Reset to default`,
+			value: `reset`
+		},
+	]
+	return cosmeticOptions
 }

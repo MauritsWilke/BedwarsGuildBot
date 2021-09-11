@@ -29,7 +29,11 @@ module.exports = class extends Command {
 	*/
 	async run(message, args, client) {
 		if (args.length == 0) {
-			return message.channel.send(`For a full list of commands, fuck off`)
+			// let helpGroups = [];
+			// client.commands.forEach((command, i) => {
+			// 	helpGroups[i] ? 
+			// })
+			message.channel.send("Fuck u, full list W.I.P.")
 		}
 
 		const commandName = args[0].toLowerCase()
