@@ -34,6 +34,7 @@ const getText = async (URL) => {
 		}
 	})
 	const text = await res.text()
+	console.log(text)
 	return text
 }
 

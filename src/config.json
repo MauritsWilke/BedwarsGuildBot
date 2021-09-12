@@ -2,7 +2,7 @@
     "bot": {
         "name": "Bedwars Guild Bot",
 		"description": "The official Bedwars Guild Bot",
-        "defaultPrefix": "g!",
+        "defaultPrefix": "d!",
 		"version": "0.5.0",
 		"inviteLink": "https://discord.com/api/oauth2/authorize?client_id=845229167041314887&permissions=8&redirect_uri=https%3A%2F%2Fwww.mauritswilke.com&scope=bot"
     },
