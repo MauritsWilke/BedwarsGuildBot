@@ -31,7 +31,7 @@ const getText = async (URL) => {
 		headers: {
 			'Content-Type': 'text/html',
 			'User-Agent': 'Mozilla/5.0 Firefox/91.0',
-			'Referer': "https://mangakakalot.com/"
+			'Forwarded': `by=${process.env.IP_ADDRESS}`
 		}
 	})
 	const text = await res.text()
