@@ -13,7 +13,7 @@ module.exports = class extends Command {
 				"pfp",
 			],
 			category: "fun",
-			usage: "pfp [username] (hex top) (hex bottom)",
+			usage: "pfp [username] (hex bottom) (hex top)",
 			example: "pfp de_grote #99DAAC #88eddB",
 			settings: {
 				"locked": false,
@@ -185,59 +185,104 @@ module.exports = class extends Command {
 function setCosmeticOptions(selectedCosmetics) {
 	cosmeticOptions = [
 		{
-			label: `${selectedCosmetics.includes("monocle") ? "❌ Remove" : ""} Monocle`,
-			description: 'Where is my top hat, Albert? 🧐',
+			label: `${selectedCosmetics.includes("monocle") ? "Remove" : ""} Monocle`,
+			description: 'Where is my top hat, Albert?',
 			value: 'monocle',
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("monocle") ? "❌" : "🧐"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("christmasHat") ? "❌ Remove" : ""} Christmas Hat`,
-			description: 'Ho Ho Ho never too early! 🎄',
+			label: `${selectedCosmetics.includes("christmasHat") ? "Remove" : ""} Christmas Hat`,
+			description: 'Ho Ho Ho never too early!',
 			value: 'christmasHat',
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("christmasHat") ? "❌" : "🎄"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("snow") ? "❌ Remove" : ""} Snow! ⛄`,
+			label: `${selectedCosmetics.includes("snow") ? "Remove" : ""} Snow! ⛄`,
 			description: `Let it snow, let it snow, let it snow!`,
-			value: `snow`
+			value: `snow`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("snow") ? "❌" : "❄"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("catears") ? "❌ Remove" : ""} Cat Ears 😺`,
+			label: `${selectedCosmetics.includes("catears") ? "Remove" : ""} Cat Ears`,
 			description: `Meow`,
-			value: `catears`
+			value: `catears`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("catears") ? "❌" : "😺"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("sunglasses") ? "❌ Remove" : ""} Sunglasses! 😎`,
+			label: `${selectedCosmetics.includes("sunglasses") ? "Remove" : ""} Sunglasses!`,
 			description: `Lookin extra cool today `,
-			value: `sunglasses`
+			value: `sunglasses`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("sunglasses") ? "❌" : "🕶"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("cape") ? "❌ Remove" : ""} Cape!`,
+			label: `${selectedCosmetics.includes("cape") ? "Remove" : ""} Cape!`,
 			description: `Coming to save the day! `,
-			value: `cape`
+			value: `cape`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("cape") ? "❌" : "🦸‍♂️"}`
+			}
 		},
 		{
-			label: ` ${selectedCosmetics.includes("crown") ? "❌ Remove" : ""} Crown 👑`,
+			label: ` ${selectedCosmetics.includes("crown") ? "Remove" : ""} Crown`,
 			description: `King of Minecraft `,
-			value: `crown`
+			value: `crown`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("crown") ? "❌" : "👑"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("ilikecats") ? "❌ Remove" : ""} I_Like_Cats__`,
+			label: `${selectedCosmetics.includes("ilikecats") ? "Remove" : ""} I_Like_Cats__`,
 			description: `Just become I_Like_cats__ `,
-			value: `ilikecats`
+			value: `ilikecats`,
+			emoji: {
+				id: selectedCosmetics.includes("ilikecats") ? null : "876553118542860288",
+				name: `${selectedCosmetics.includes("ilikecats") ? "❌" : "slapping_cats"}`,
+				animated: selectedCosmetics.includes("ilikecats") ? false : true
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("greyscale") ? "❌ Remove" : ""} Greyscale filter!`,
+			label: `${selectedCosmetics.includes("greyscale") ? "Remove" : ""} Greyscale filter!`,
 			description: `Colours are too OP `,
-			value: `greyscale`
+			value: `greyscale`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("greyscale") ? "❌" : "⬛"}`
+			}
 		},
 		{
-			label: `${selectedCosmetics.includes("tophat") ? "❌ Remove" : ""} Top hat 🎩`,
+			label: `${selectedCosmetics.includes("tophat") ? "Remove" : ""} Top hat`,
 			description: `Found the top hat, Albert `,
-			value: `tophat`
+			value: `tophat`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("tophat") ? "❌" : "🎩"}`
+			}
 		},
 		{
-			label: `Reset ❌`,
+			label: `Reset`,
 			description: `Reset to default`,
-			value: `reset`
+			value: `reset`,
+			emoji: {
+				id: null,
+				name: `❌`
+			}
 		},
 	]
 	return cosmeticOptions

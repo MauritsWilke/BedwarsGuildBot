@@ -29,7 +29,7 @@
 
         "images": {
             "success": "",
-            "failed": "",
+            "failed": "https://cdn.discordapp.com/attachments/847927017470558208/886444731192713256/error.gif",
 			"gamemodes": {
 				"bedwars": "https://hypixel.net/styles/hypixel-v2/images/game-icons/BedWars-64.png"
 			}
@@ -46,7 +46,12 @@
     },
 
     "changelog": [
-		"Eval was added",
-		"Map rotation commands"
+		"+ Map rotation commands",
+		"+ Map Checking Command",
+		"+ Help Command",
+		"+ Full Command List",
+		"+ Translate",
+		"+ Profile Picture Generator",
+		"+ Cosmetics"
 	]
 }

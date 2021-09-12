@@ -6,7 +6,7 @@ const chalk = require(`chalk`)
 module.exports = (client) => {
 
 	process.on('exit', (code) => {
-		console.dlog(chalk`{bold.red ${config.design.char.error} Client shutting down with code:}`, `${code}`);
+		console.log(chalk`{bold.red ${config.design.char.error} Client shutting down with code:}`, `${code}`);
 
 		// const newEmbed = new Discord.MessageEmbed()
 		// 	.setColor(config.design.colourScheme.error)

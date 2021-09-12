@@ -1,6 +1,6 @@
 const { Collection, MessageEmbed } = require("discord.js")
 const { getDevID } = require("../../utils/utils")
-const { bot: { defaultPrefix, name }, devs, design: { colourScheme } } = require('../../config.json')
+const { bot: { defaultPrefix, name }, devs, design: { colourScheme, images, other: { bulletPoint } } } = require('../../config.json')
 const { commandLocked } = require(`../../utils/templates/embedTemplates`)
 
 const cooldowns = new Map();
@@ -51,7 +51,26 @@ module.exports = async (client, message) => {
 					const reaction = collected.first();
 
 					if (reaction.emoji.name === `✅`) {
-						command.run(message, args, client)
+						try {
+							command.run(message, args, client)
+								.catch(err => {
+									const errorEmbed = new MessageEmbed()
+										.setColor(colourScheme.error)
+										.setTitle(`Something went wrong!`)
+										.setDescription(`- ${err}`)
+										.setThumbnail(images.failed)
+										.setFooter(name);
+									return message.channel.send({ embeds: [errorEmbed] });
+								})
+						} catch (e) {
+							const errorEmbed = new MessageEmbed()
+								.setColor(colourScheme.error)
+								.setTitle(`Something went wrong!`)
+								.setDescription(`- ${err}`)
+								.setThumbnail(images.failed)
+								.setFooter(name);
+							return message.channel.send({ embeds: [errorEmbed] });
+						}
 					}
 
 					msg.delete()
@@ -78,4 +97,23 @@ module.exports = async (client, message) => {
 	}
 
 	command.run(message, args, client)
+	// try {
+	// 		.catch(err => {
+	// 			const errorEmbed = new MessageEmbed()
+	// 				.setColor(colourScheme.error)
+	// 				.setTitle(`Something went wrong!`)
+	// 				.setDescription(`${bulletPoint} ${err}`)
+	// 				.setThumbnail(images.failed)
+	// 				.setFooter(name);
+	// 			return message.channel.send({ embeds: [errorEmbed] });
+	// 		})
+	// } catch (e) {
+	// 	const errorEmbed = new MessageEmbed()
+	// 		.setColor(colourScheme.error)
+	// 		.setTitle(`Something went wrong!`)
+	// 		.setDescription(`${bulletPoint} ${err}`)
+	// 		.setThumbnail(images.failed)
+	// 		.setFooter(name);
+	// 	return message.channel.send({ embeds: [errorEmbed] });
+	// }
 }
