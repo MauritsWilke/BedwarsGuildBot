@@ -16,5 +16,8 @@
         "simpleview": "echo { \"files.exclude\": { \"node_modules/\": true,        \"package-lock.json\": true,        \".env\": false,        \"package.json\": true,        \"src/handlers\": true,        \"src/events\": true,        \"src/index.js\": true,        \".vscode/\": true,        \".utils/templates/\": true, }} >> .vscode/settings.json",
         "simpleviewdisable": "echo[ > .vscode/settings.json",
         "start": "node src/index.js"
-    }
+    },
+	"engines": {
+		"node": "16.3.0"
+	  },
 }
