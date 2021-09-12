@@ -30,7 +30,8 @@ const getText = async (URL) => {
 		method: `GET`,
 		headers: {
 			'Content-Type': 'text/html',
-			'User-Agent': 'Mozilla/5.0 Firefox/91.0'
+			'User-Agent': 'Mozilla/5.0 Firefox/91.0',
+			'referer': 'https://market.csgo.com/',
 		}
 	})
 	const text = await res.text()
