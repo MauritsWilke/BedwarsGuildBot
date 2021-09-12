@@ -4,7 +4,7 @@ const chalk = require('chalk')
 module.exports = (client) => {
 	client.user.setPresence({
 		activities: [{
-			name: '!',
+			name: 'g!',
 			type: "LISTENING"
 		}],
 		status: 'online'
