@@ -258,12 +258,12 @@ function setCosmeticOptions(selectedCosmetics) {
 			}
 		},
 		{
-			label: `${selectedCosmetics.includes("greyscale") ? "Remove" : ""} Greyscale filter!`,
-			description: `Colours are too OP `,
-			value: `greyscale`,
+			label: `${selectedCosmetics.includes("trident") ? "Remove" : ""} Trident!`,
+			description: `Like Poseidon!`,
+			value: `trident`,
 			emoji: {
 				id: null,
-				name: `${selectedCosmetics.includes("greyscale") ? "❌" : "⬛"}`
+				name: `${selectedCosmetics.includes("trident") ? "❌" : "🔱"}`
 			}
 		},
 		{
@@ -273,6 +273,15 @@ function setCosmeticOptions(selectedCosmetics) {
 			emoji: {
 				id: null,
 				name: `${selectedCosmetics.includes("tophat") ? "❌" : "🎩"}`
+			}
+		},
+		{
+			label: `${selectedCosmetics.includes("greyscale") ? "Remove" : ""} Greyscale filter!`,
+			description: `Colours are too OP `,
+			value: `greyscale`,
+			emoji: {
+				id: null,
+				name: `${selectedCosmetics.includes("greyscale") ? "❌" : "⬛"}`
 			}
 		},
 		{

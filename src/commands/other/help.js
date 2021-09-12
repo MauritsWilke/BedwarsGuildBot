@@ -65,7 +65,7 @@ module.exports = class extends Command {
 			.addFields([
 				{ name: `**__Category__**`, value: `${bulletPoint} ${command?.category ?? other}`, inline: false },
 				{ name: `**__Usage__**`, value: `${bulletPoint} ${command?.usage ?? "Some idiot left usage out, sorry"}`, inline: false },
-				{ name: `**_Example__**`, value: `${bulletPoint} ${command?.example ?? "Some idiot didn't add an example, sorry"}`, inline: false },
+				{ name: `**__Example__**`, value: `${bulletPoint} ${command?.example ?? "Some idiot didn't add an example, sorry"}`, inline: false },
 			])
 		if (commandAliases.length > 0) helpEmbed.addField(`**__Aliases__**`, `${bulletPoint} ${commandAliases.join(`\n`)}`, false)
 		helpEmbed.addField(`**__Cooldown__**`, `${bulletPoint} ${command?.settings?.cooldown / 1000 ?? "None!"}${command?.settings?.cooldown ? "s" : null}`, false)

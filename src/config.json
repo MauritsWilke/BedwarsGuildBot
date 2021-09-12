@@ -2,9 +2,9 @@
     "bot": {
         "name": "Bedwars Guild Bot",
 		"description": "The official Bedwars Guild Bot",
-        "defaultPrefix": "d!",
-		"version": "0.0.1",
-		"inviteLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        "defaultPrefix": "g!",
+		"version": "0.5.0",
+		"inviteLink": "https://discord.com/api/oauth2/authorize?client_id=845229167041314887&permissions=8&redirect_uri=https%3A%2F%2Fwww.mauritswilke.com&scope=bot"
     },
 
 	"devs": [
@@ -28,8 +28,8 @@
         },
 
         "images": {
-            "success": "",
-            "failed": "https://cdn.discordapp.com/attachments/847927017470558208/886444731192713256/error.gif",
+            "success": "https://cdn.discordapp.com/attachments/844946158400831551/851403861197193226/ezgif-3-6c01e43fd331.gif",
+            "failed": "https://media2.giphy.com/media/DHBGehJ3FSZEygszX3/giphy.gif?cid=ecf05e477r5hkwvszxz7duk9rbbsuv00f1fwivb0ydktz2ko",
 			"gamemodes": {
 				"bedwars": "https://hypixel.net/styles/hypixel-v2/images/game-icons/BedWars-64.png"
 			}
@@ -52,6 +52,9 @@
 		"+ Full Command List",
 		"+ Translate",
 		"+ Profile Picture Generator",
-		"+ Cosmetics"
+		"+ Cosmetics",
+		"+ Index command",
+		"+ Reqs command",
+		"+ A completely new bot!"
 	]
 }
