@@ -28,15 +28,10 @@ const mapTypes = [
 const getText = async (URL) => {
 	const res = await fetch(URL, {
 		method: `GET`,
-		userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
 		headers: {
-			'accept': 'text/html',
-			'accept-encoding': 'gzip, deflate, br',
-			'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6,la;q=0.5',
-			'cache-control': 'max-age=0',
-			'referer': 'https://market.csgo.com/',
-			'upgrade-insecure-requests': 1,
-			'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+			'Content-Type': 'text/html',
+			'User-Agent': 'Mozilla/5.0 Firefox/91.0',
+			'X-Forwarded-For': `203.0.113.195, 70.41.3.18, 150.172.238.178`
 		}
 	})
 	const text = await res.text()

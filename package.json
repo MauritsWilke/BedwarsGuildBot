@@ -17,7 +17,7 @@
         "simpleviewdisable": "echo[ > .vscode/settings.json",
         "start": "node src/index.js"
     },
-	"engines": {
-		"node": "16.3.0"
-	  }
+    "engines": {
+        "node": "16.3.0"
+    }
 }
