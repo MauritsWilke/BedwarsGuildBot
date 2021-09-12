@@ -7,7 +7,9 @@ module.exports = class extends Command {
 		super({
 			name: "botinfo",
 			description: "Retrieve info about the bot",
-			aliases: [],
+			aliases: [
+				"invite"
+			],
 			category: "other",
 			usage: "botinfo",
 			example: "botinfo",
