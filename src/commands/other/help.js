@@ -33,13 +33,14 @@ module.exports = class extends Command {
 			client.commands.forEach((command) => {
 				const commandCategory = command.category || "other"
 				if (!helpGroups[commandCategory]) helpGroups[commandCategory] = []
-				helpGroups[commandCategory].push(command.name)
+				helpGroups[commandCategory].push(`${command.settings.locked ? "🔒" : ""} ${command.name}`)
 			})
 
 			const helpEmbed = new MessageEmbed()
 				.setColor(colourScheme.default)
 				.setTitle(`Full Command List`)
 				.setDescription(`Do \`${defaultPrefix}help (command)\` to see more info about a command!`)
+				.setFooter(`🔒 means a command is currently locked`)
 
 			for (const [category, commands] of Object.entries(helpGroups)) {
 				const commandList = `\`\`\`\n${commands.join("\n")}\`\`\``
