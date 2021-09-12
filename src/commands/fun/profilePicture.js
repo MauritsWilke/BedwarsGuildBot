@@ -135,7 +135,17 @@ module.exports = class extends Command {
 			ctx.drawImage(secondCanvas, 0, 0, 20, 20)
 			const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
 
-			if (selection.values[0] == `reset`) return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` });
+			if (selection.values[0] == `reset`) {
+				selectedCosmetics = []
+				const row = new MessageActionRow()
+					.addComponents(
+						new MessageSelectMenu()
+							.setCustomId('cosmeticSelect')
+							.setPlaceholder('Add cosmetics! (optional)')
+							.addOptions(setCosmeticOptions(selectedCosmetics)),
+					);
+				return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B`, components: [row] });
+			}
 
 			if (selectedCosmetics.includes(selection.values[0])) {
 				selectedCosmetics = selectedCosmetics.filter(v => v != selection.values[0])
