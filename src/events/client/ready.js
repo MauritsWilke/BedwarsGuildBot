@@ -1,10 +1,11 @@
 const config = require(`../../config.json`)
 const chalk = require('chalk')
+const { bot: { defaultPrefix } } = require(`../../config.json`)
 
 module.exports = (client) => {
 	client.user.setPresence({
 		activities: [{
-			name: 'g!',
+			name: defaultPrefix,
 			type: "LISTENING"
 		}],
 		status: 'online'

@@ -19,6 +19,7 @@ module.exports = class extends Command {
 			usage: "rotation",
 			example: "rotation",
 			settings: {
+				"locked": true,
 				"cooldown": 5000,
 				"args": [],
 				"perms": [

@@ -13,9 +13,10 @@ module.exports = class extends Command {
 				"mpas"
 			],
 			category: "hypixel",
-			usage: "map <map name>",
+			usage: "map [map name]",
 			example: "map lighthouse",
 			settings: {
+				"locked": true,
 				"cooldown": 5000,
 				"perms": [
 					"SEND_MESSAGES"

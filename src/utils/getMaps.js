@@ -31,19 +31,9 @@ const getText = async (URL) => {
 		headers: {
 			'Content-Type': 'text/html',
 			'User-Agent': 'Mozilla/5.0 Firefox/91.0',
-			'Host': "hypixel.net",
-			'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0",
-			'Accept': `*/*`,
-			"Accept-Language": "en-GB,en;q=0.5",
-			"Accept-Encoding": "gzip, deflate, br",
-			"Referer": "https://hyapi.tech/",
-			"Origin": "https://hyapi.tech",
-			"DNT": 1,
-			"Connection": "keep-alive",
 		}
 	})
 	const text = await res.text()
-	console.log(text)
 	return text
 }
 
