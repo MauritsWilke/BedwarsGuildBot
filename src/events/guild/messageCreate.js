@@ -17,6 +17,7 @@ module.exports = async (client, message) => {
 	if (!command) return;
 	const { settings } = command;
 
+	// _ Cooldowns
 	if (!getDevID(devs).includes(message.author.id)) {
 		if (!cooldowns.has(commandName)) {
 			cooldowns.set(commandName, new Collection())
@@ -37,6 +38,7 @@ module.exports = async (client, message) => {
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	}
 
+	// _ Command locked & Dev Only
 	if (settings?.locked) {
 		if (getDevID(devs).includes(message.author.id)) {
 			const msg = await message.reply({ embeds: [commandLocked] })
@@ -74,13 +76,15 @@ module.exports = async (client, message) => {
 					}
 
 					msg.delete()
-				})
+
+				}).catch(e => { msg.delete() })
 			return
 		}
 		return message.reply("This command is disabled, sorry");
 	}
 	if (settings?.devOnly && !getDevID(devs).includes(message.author.id)) return message.reply("This command is exclusive to our dev team, sorry");
 
+	// _ Missing Perms (And Embed Response)
 	let missingPerms = []
 	settings?.perms.forEach((perm) => {
 		if (!message.guild.me.permissions.has(perm)
@@ -96,6 +100,7 @@ module.exports = async (client, message) => {
 		return message.channel.send({ embeds: [embed] })
 	}
 
+	// _ Command Execution
 	try {
 		command.run(message, args, client)
 			.catch(err => {

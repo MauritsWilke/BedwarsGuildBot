@@ -39,7 +39,7 @@ module.exports = class extends Command {
 			const helpEmbed = new MessageEmbed()
 				.setColor(colourScheme.default)
 				.setTitle(`Full Command List`)
-				.setDescription(`Do \`${defaultPrefix}help (command)\` to see more info about the command!`)
+				.setDescription(`Do \`${defaultPrefix}help (command)\` to see more info about a command!`)
 
 			for (const [category, commands] of Object.entries(helpGroups)) {
 				const commandList = `\`\`\`\n${commands.join("\n")}\`\`\``

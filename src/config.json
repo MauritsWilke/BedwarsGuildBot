@@ -46,8 +46,6 @@
     },
 
     "changelog": [
-		"+ Map rotation commands",
-		"+ Map Checking Command",
 		"+ Help Command",
 		"+ Full Command List",
 		"+ Translate",
@@ -55,6 +53,10 @@
 		"+ Cosmetics",
 		"+ Index command",
 		"+ Reqs command",
-		"+ A completely new bot!"
+		"+ Locking commands",
+		"+ Better Status Handling",
+		"+ A completely new bot!",
+		"- Map rotation commands",
+		"- Map Checking Command"
 	]
 }
