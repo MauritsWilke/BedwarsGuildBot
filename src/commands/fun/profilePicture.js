@@ -135,31 +135,7 @@ module.exports = class extends Command {
 			ctx.drawImage(secondCanvas, 0, 0, 20, 20)
 			const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
 
-
 			if (selection.values[0] == `reset`) return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` });
-
-			if (selection.values[0] == `greyscale`) {
-
-				let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-				let dataArray = imageData.data;
-				for (let i = 0; i < dataArray.length; i += 4) {
-					let red = dataArray[i];
-					let green = dataArray[i + 1];
-					let blue = dataArray[i + 2];
-					let alpha = dataArray[i + 3];
-
-					let gray = (red + green + blue) / 3;
-
-					dataArray[i] = gray;
-					dataArray[i + 1] = gray;
-					dataArray[i + 2] = gray;
-					dataArray[i + 3] = alpha; // not changing the transparency
-				}
-
-				ctx.putImageData(imageData, 0, 0);
-				const cosmeticAttachment = new MessageAttachment(canvas.toBuffer(), 'profilePicture.png')
-				await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B` })
-			}
 
 			if (selectedCosmetics.includes(selection.values[0])) {
 				selectedCosmetics = selectedCosmetics.filter(v => v != selection.values[0])
@@ -178,10 +154,15 @@ module.exports = class extends Command {
 			let drawnCosmetics = 0;
 			if (selectedCosmetics.length == 0) return sendUpdatedCanvas()
 			selectedCosmetics.forEach(async (selCos) => {
-				const cosmetic = await loadImage(`src/images/profilePicture/${selCos}.png`)
-				ctx.drawImage(cosmetic, 0, 0, 20, 20);
+				if (selCos !== "greyscale") {
+					const cosmetic = await loadImage(`src/images/profilePicture/${selCos}.png`)
+					ctx.drawImage(cosmetic, 0, 0, 20, 20);
+				}
 				drawnCosmetics++
-				if (drawnCosmetics === selectedCosmetics.length) sendUpdatedCanvas()
+				if (drawnCosmetics === selectedCosmetics.length) {
+					if (selectedCosmetics.includes("greyscale")) canvasToGreyscale(canvas, ctx)
+					sendUpdatedCanvas()
+				}
 			})
 
 			async function sendUpdatedCanvas() {
@@ -196,6 +177,11 @@ module.exports = class extends Command {
 	}
 }
 
+/**
+ * Sets the correct options for the arrays (Remove)
+ * @param {array} selectedCosmetics 
+ * @returns {array} cosmeticOptions
+ */
 function setCosmeticOptions(selectedCosmetics) {
 	cosmeticOptions = [
 		{
@@ -239,8 +225,8 @@ function setCosmeticOptions(selectedCosmetics) {
 			value: `ilikecats`
 		},
 		{
-			label: `Greyscale filter!`,
-			description: `❗ Currently kinda broken Colours are too OP `,
+			label: `${selectedCosmetics.includes("greyscale") ? "❌ Remove" : ""} Greyscale filter!`,
+			description: `Colours are too OP `,
 			value: `greyscale`
 		},
 		{
@@ -255,4 +241,31 @@ function setCosmeticOptions(selectedCosmetics) {
 		},
 	]
 	return cosmeticOptions
+}
+
+/**
+ * Convert canvas to grey 
+ * @param {object} canvas - The canvas to convert to greyscale
+ * @param {object} ctx - The context of the canvas
+ * @returns {object} canvas
+ */
+function canvasToGreyscale(canvas, ctx) {
+	let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+	let dataArray = imageData.data;
+	for (let i = 0; i < dataArray.length; i += 4) {
+		let red = dataArray[i];
+		let green = dataArray[i + 1];
+		let blue = dataArray[i + 2];
+		let alpha = dataArray[i + 3];
+
+		let gray = (red + green + blue) / 3;
+
+		dataArray[i] = gray;
+		dataArray[i + 1] = gray;
+		dataArray[i + 2] = gray;
+		dataArray[i + 3] = alpha; // not changing the transparency
+	}
+
+	ctx.putImageData(imageData, 0, 0);
+	return canvas
 }

@@ -1,5 +1,5 @@
 const Command = require(`../../utils/command`)
-const { MessageEmbed } = require(`discord.js`)
+const { MessageEmbed, MessageAttachment } = require(`discord.js`)
 const { design: { colourScheme, other: { bulletPoint } }, bot: { defaultPrefix } } = require(`../../config.json`)
 
 module.exports = class extends Command {
@@ -29,11 +29,25 @@ module.exports = class extends Command {
 	*/
 	async run(message, args, client) {
 		if (args.length == 0) {
-			// let helpGroups = [];
-			// client.commands.forEach((command, i) => {
-			// 	helpGroups[i] ? 
-			// })
-			message.channel.send("Fuck u, full list W.I.P.")
+			let helpGroups = {}
+			client.commands.forEach((command) => {
+				const commandCategory = command.category || "other"
+				if (!helpGroups[commandCategory]) helpGroups[commandCategory] = []
+				helpGroups[commandCategory].push(command.name)
+			})
+
+			const helpEmbed = new MessageEmbed()
+				.setColor(colourScheme.default)
+				.setTitle(`Full Command List`)
+				.setDescription(`Do \`${defaultPrefix}help (command)\` to see more info about the command!`)
+
+			for (const [category, commands] of Object.entries(helpGroups)) {
+				const commandList = `\`\`\`\n${commands.join("\n")}\`\`\``
+				const commandCategory = `**__${category.charAt(0).toUpperCase() + category.slice(1)}__**`
+				helpEmbed.addField(commandCategory, commandList, true)
+			}
+
+			return message.channel.send({ embeds: [helpEmbed] })
 		}
 
 		const commandName = args[0].toLowerCase()
@@ -49,12 +63,12 @@ module.exports = class extends Command {
 			.setTitle(`${defaultPrefix}${command.name}`)
 			.setDescription(`\`\`\`${command.description}\`\`\``)
 			.addFields([
-				{ name: `**Category**`, value: `${bulletPoint} ${command?.category ?? other}`, inline: false },
-				{ name: `**Usage**`, value: `${bulletPoint} ${command?.usage ?? "Some idiot left usage out, sorry"}`, inline: false },
-				{ name: `**Example**`, value: `${bulletPoint} ${command?.example ?? "Some idiot didn't add an example, sorry"}`, inline: false },
+				{ name: `**__Category__**`, value: `${bulletPoint} ${command?.category ?? other}`, inline: false },
+				{ name: `**__Usage__**`, value: `${bulletPoint} ${command?.usage ?? "Some idiot left usage out, sorry"}`, inline: false },
+				{ name: `**_Example__**`, value: `${bulletPoint} ${command?.example ?? "Some idiot didn't add an example, sorry"}`, inline: false },
 			])
-		if (commandAliases.length > 0) helpEmbed.addField(`**Aliases**`, `${bulletPoint} ${commandAliases.join(`\n`)}`, false)
-		helpEmbed.addField(`**Cooldown**`, `${bulletPoint} ${command?.settings?.cooldown / 1000 ?? "None!"}${command?.settings?.cooldown ? "s" : null}`, false)
+		if (commandAliases.length > 0) helpEmbed.addField(`**__Aliases__**`, `${bulletPoint} ${commandAliases.join(`\n`)}`, false)
+		helpEmbed.addField(`**__Cooldown__**`, `${bulletPoint} ${command?.settings?.cooldown / 1000 ?? "None!"}${command?.settings?.cooldown ? "s" : null}`, false)
 
 		message.channel.send({ embeds: [helpEmbed] })
 	}
