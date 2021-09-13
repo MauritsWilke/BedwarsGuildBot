@@ -43,5 +43,12 @@
 			"}"
 		],
 		"description": "Command Template"
+	},
+	"Delete Message": {
+		"prefix": "@delmsg",
+		"body": [
+			".then(m => { setTimeout(() => m.delete(), ${1:0}) }).catch(e => { })"
+		],
+		"description": "Delete a message after X ms"
 	}
 }

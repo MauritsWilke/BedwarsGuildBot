@@ -2,11 +2,28 @@ const { Collection, MessageEmbed } = require("discord.js")
 const { getDevID } = require("../../utils/utils")
 const { bot: { defaultPrefix, name }, devs, design: { colourScheme, images, other: { bulletPoint } } } = require('../../config.json')
 const { commandLocked } = require(`../../utils/templates/embedTemplates`)
+const chalk = require(`chalk`)
 
 const cooldowns = new Map();
 
 module.exports = async (client, message) => {
 	if (message.channel.type !== "GUILD_TEXT") return;
+
+	// _ Old Prefix Reminder
+	if (message.content.startsWith(`!`)) {
+		const args = message.content.slice(1).split(/ +/);
+		const commandName = args.shift().toLowerCase();
+		const command = client.commands.get(commandName) ||
+			client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+		if (!command) return;
+		const sorryEmbed = new MessageEmbed()
+			.setColor(colourScheme.default)
+			.setDescription(`${bulletPoint} The prefix has been changed to \`g!\``)
+			.setFooter(name)
+		message.channel.send({ embeds: [sorryEmbed] })
+			.then(m => { setTimeout(() => m.delete(), 10000) }).catch(e => { })
+	}
+
 	if (!message.content.startsWith(defaultPrefix) || message.author.bot) return;
 
 	const args = message.content.slice(defaultPrefix.length).split(/ +/);
@@ -53,22 +70,25 @@ module.exports = async (client, message) => {
 					const reaction = collected.first();
 
 					if (reaction.emoji.name === `✅`) {
+						console.log(chalk`{greenBright > ${command.name} was used in ${message.guild.name} by ${message.author.tag}}`)
 						try {
 							command.run(message, args, client)
 								.catch(err => {
+									console.log(chalk`{redBright ! ${command.name} failed due to ${err}}`)
 									const errorEmbed = new MessageEmbed()
 										.setColor(colourScheme.error)
 										.setTitle(`Something went wrong!`)
-										.setDescription(`- ${err}`)
+										.setDescription(`${bulletPoint} ${err}`)
 										.setThumbnail(images.failed)
 										.setFooter(name);
 									return message.channel.send({ embeds: [errorEmbed] });
 								})
 						} catch (e) {
+							console.log(chalk`{redBright ! ${command.name} failed due to ${err}}`)
 							const errorEmbed = new MessageEmbed()
 								.setColor(colourScheme.error)
 								.setTitle(`Something went wrong!`)
-								.setDescription(`- ${err}`)
+								.setDescription(`${bulletPoint} ${err}`)
 								.setThumbnail(images.failed)
 								.setFooter(name);
 							return message.channel.send({ embeds: [errorEmbed] });
@@ -101,9 +121,11 @@ module.exports = async (client, message) => {
 	}
 
 	// _ Command Execution
+	console.log(chalk`{greenBright > ${command.name} was used in ${message.guild.name} by ${message.author.tag}}`)
 	try {
 		command.run(message, args, client)
 			.catch(err => {
+				console.log(chalk`{redBright ! ${command.name} failed due to ${err}}`)
 				const errorEmbed = new MessageEmbed()
 					.setColor(colourScheme.error)
 					.setTitle(`Something went wrong!`)
@@ -113,6 +135,7 @@ module.exports = async (client, message) => {
 				return message.channel.send({ embeds: [errorEmbed] });
 			})
 	} catch (e) {
+		console.log(chalk`{redBright ! ${command.name} failed due to ${err}}`)
 		const errorEmbed = new MessageEmbed()
 			.setColor(colourScheme.error)
 			.setTitle(`Something went wrong!`)

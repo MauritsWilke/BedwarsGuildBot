@@ -1,6 +1,6 @@
 const Command = require(`../../utils/command`)
-const { MessageEmbed } = require(`discord.js`)
-const { design: { colourScheme }, bot, devs } = require(`../../config.json`)
+const { MessageEmbed, MessageActionRow, MessageButton } = require(`discord.js`)
+const { design: { colourScheme, other: { githubRepo } }, bot, devs } = require(`../../config.json`)
 
 module.exports = class extends Command {
 	constructor() {
@@ -36,6 +36,20 @@ module.exports = class extends Command {
 		let minutes = Math.floor(totalSeconds / 60);
 		let seconds = Math.floor(totalSeconds % 60);
 
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageButton()
+					.setLabel('GitHub')
+					.setURL(`https://github.com/MauritsWilke/BedwarsGuildBot`)
+					.setEmoji('846355712854851604')
+					.setStyle('LINK'),
+				new MessageButton()
+					.setLabel('Support Server')
+					.setURL(`https://discord.gg/VmAQ6rpsHg`)
+					.setEmoji('834448218016186388')
+					.setStyle('LINK'),
+			);
+
 		const newEmbed = new MessageEmbed()
 			.setColor(colourScheme.default)
 			.setTitle(`${bot.name} info`)
@@ -53,9 +67,8 @@ module.exports = class extends Command {
 				{ name: 'Memory used', value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}mb`, inline: true },
 				{ name: 'Invite', value: `[Click here!](${bot.inviteLink})`, inline: true }
 			)
-			.setTimestamp()
 			.setFooter(bot.name);
 
-		return message.channel.send({ embeds: [newEmbed] })
+		return message.channel.send({ embeds: [newEmbed], components: [row] })
 	}
 }

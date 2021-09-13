@@ -36,6 +36,17 @@ module.exports = class extends Command {
 		const command = client.commands.get(commandName) ||
 			client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+		if (!command) {
+			const lockedEmbed = new MessageEmbed()
+				.setColor(colourScheme.error)
+				.setTitle(`This command doesn't exist!`)
+				.setThumbnail(images.failed)
+				.setFooter(name);
+			message.channel.send({ embeds: [lockedEmbed] })
+				.then(m => { setTimeout(() => m.delete(), 15000) }).catch(e => { })
+			return
+		}
+
 		command.settings.locked = lockOrUnlock == "lock";
 
 		const lockedEmbed = new MessageEmbed()

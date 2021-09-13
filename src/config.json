@@ -2,8 +2,8 @@
     "bot": {
         "name": "Bedwars Guild Bot",
 		"description": "The official Bedwars Guild Bot",
-        "defaultPrefix": "g!",
-		"version": "0.5.1",
+        "defaultPrefix": "d!",
+		"version": "0.5.2",
 		"inviteLink": "https://discord.com/api/oauth2/authorize?client_id=845229167041314887&permissions=8&redirect_uri=https%3A%2F%2Fwww.mauritswilke.com&scope=bot"
     },
 
@@ -41,7 +41,8 @@
 		},
 
 		"other": {
-			"bulletPoint": "`•`"
+			"bulletPoint": "`•`",
+			"githubRepo": "https://github.com/MauritsWilke/BedwarsGuildBot"
 		}
     },
 
@@ -54,8 +55,8 @@
 		"+ Index command",
 		"+ Reqs command",
 		"+ Locking commands",
-		"+ Better Status Handling",
-		"+ A completely new bot!",
+		"+ Added some nice console code for myself :)",
+		"+ Updated the botinfo command",
 		"+ Fixed a bug in pfp",
 		"- Map rotation commands",
 		"- Map Checking Command"
