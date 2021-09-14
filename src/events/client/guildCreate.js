@@ -3,7 +3,7 @@ const { bot, design: { colourScheme } } = require(`../../config.json`)
 const chalk = require(`chalk`)
 
 module.exports = (client, guild) => {
-	console.log(chalk`{ > Joined [${guild?.name}] adding [${guild?.memberCount}] more users!}`)
+	console.log(chalk`{greenBright > Joined [${guild?.name}] adding [${guild?.memberCount}] more users!}`)
 
 	const channel = guild?.channels.cache.find(channel => channel?.type === 'GUILD_TEXT' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
 	if (!channel) return;
