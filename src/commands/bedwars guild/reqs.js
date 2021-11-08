@@ -44,8 +44,8 @@ module.exports = class extends Command {
 		let playerDiscord = (player?.socialMedia?.links?.DISCORD === undefined) ? "Not linked" : player?.socialMedia?.links?.DISCORD;
 
 		let meetsOne = client.users.cache.find(u => u?.tag === playerDiscord)?.id !== undefined ? ':white_check_mark:' : `:x:`;
-		let meetsTwo = daysBetween <= 7 ? ':white_check_mark:' : meetsTwo = `:x:`;
-		let meetsThree = index >= 30 ? ':white_check_mark:' : meetsThree = `:x:`;
+		let meetsTwo = daysBetween <= 7 ? ':white_check_mark:' : `:x:`;
+		let meetsThree = index >= 50 ? ':white_check_mark:' : `:x:`;
 		let colour = meetsOne === ':white_check_mark:' && meetsTwo === ':white_check_mark:' && meetsThree === ':white_check_mark:' ? '#55FF55' : '#FF5555';
 
 		const reqEmbed = new MessageEmbed()
@@ -55,7 +55,7 @@ module.exports = class extends Command {
 			.addFields(
 				{ name: '**__In The Discord__**', value: `${meetsOne} \`\`${playerDiscord}\`\``, inline: false },
 				{ name: '**__Active at least once a week__**', value: `${meetsTwo}  \`\`Last login at ${new Date(player.lastLogin).toString().slice(4, 15)}\`\``, inline: false },
-				{ name: '**__Index score of 30+__**', value: `${meetsThree} \`\`${index.toFixed(2) ?? "0"}\`\``, inline: false },
+				{ name: '**__Index score of 50+__**', value: `${meetsThree} \`\`${index.toFixed(2) ?? "0"}\`\``, inline: false },
 			)
 			.setFooter(bot.name);
 		message.channel.send({ embeds: [reqEmbed] });

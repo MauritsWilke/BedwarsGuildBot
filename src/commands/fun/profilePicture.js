@@ -144,7 +144,7 @@ module.exports = class extends Command {
 							.setPlaceholder('Add cosmetics! (optional)')
 							.addOptions(setCosmeticOptions(selectedCosmetics)),
 					);
-				return await selection.update({ files: [cosmeticAttachment], attachments: [], content: `\u200B`, components: [row] });
+				return await selection.update({ files: [cosmeticAttachment], attachments: [null], content: `\u200B`, components: [row] });
 			}
 
 			if (selectedCosmetics.includes(selection.values[0])) {

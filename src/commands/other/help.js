@@ -1,6 +1,6 @@
 const Command = require(`../../utils/command`)
 const { MessageEmbed, MessageAttachment } = require(`discord.js`)
-const { design: { colourScheme, other: { bulletPoint } }, bot: { defaultPrefix } } = require(`../../config.json`)
+const { design: { colourScheme, images, other: { bulletPoint } }, bot: { defaultPrefix } } = require(`../../config.json`)
 
 module.exports = class extends Command {
 	constructor() {
@@ -54,7 +54,15 @@ module.exports = class extends Command {
 		const commandName = args[0].toLowerCase()
 		const command = client.commands.get(commandName) ||
 			client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-		if (!command) return message.channel.send({ content: `That command does not exist!`, ephemeral: true });
+		if (!command) {
+			const noCommandEmbed = new MessageEmbed()
+				.setColor(colourScheme.error)
+				.setTitle(`That command does not exist!`)
+				.setThumbnail(images.failed)
+			message.channel.send({ embeds: [noCommandEmbed] })
+				.then(m => { setTimeout(() => m.delete(), 15000) }).catch(e => { });
+			return
+		}
 
 		let commandAliases = []
 		command?.aliases.forEach((alias) => commandAliases.push(alias))

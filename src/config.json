@@ -1,12 +1,11 @@
 {
-    "bot": {
-        "name": "Bedwars Guild Bot",
+	"bot": {
+		"name": "Bedwars Guild Bot",
 		"description": "The official Bedwars Guild Bot",
-        "defaultPrefix": "g!",
+		"defaultPrefix": "g!",
 		"version": "0.5.2",
 		"inviteLink": "https://discord.com/api/oauth2/authorize?client_id=845229167041314887&permissions=8&redirect_uri=https%3A%2F%2Fwww.mauritswilke.com&scope=bot"
-    },
-
+	},
 	"devs": [
 		{
 			"Name": "The Almighty One",
@@ -19,34 +18,29 @@
 			"DiscordID": "544232186967228448"
 		}
 	],
-
-    "design": {
-        "colourScheme": {
-            "default": "#55FFFF",
-            "success": "#55FF55",
-            "error": "#FF5555"
-        },
-
-        "images": {
-            "success": "https://cdn.discordapp.com/attachments/844946158400831551/851403861197193226/ezgif-3-6c01e43fd331.gif",
-            "failed": "https://media2.giphy.com/media/DHBGehJ3FSZEygszX3/giphy.gif?cid=ecf05e477r5hkwvszxz7duk9rbbsuv00f1fwivb0ydktz2ko",
+	"design": {
+		"colourScheme": {
+			"default": "#55FFFF",
+			"success": "#55FF55",
+			"error": "#FF5555"
+		},
+		"images": {
+			"success": "https://cdn.discordapp.com/attachments/844946158400831551/851403861197193226/ezgif-3-6c01e43fd331.gif",
+			"failed": "https://media2.giphy.com/media/DHBGehJ3FSZEygszX3/giphy.gif?cid=ecf05e477r5hkwvszxz7duk9rbbsuv00f1fwivb0ydktz2ko",
 			"gamemodes": {
 				"bedwars": "https://hypixel.net/styles/hypixel-v2/images/game-icons/BedWars-64.png"
 			}
-        },
-
+		},
 		"char": {
 			"error": "!",
 			"warning": "⚠"
 		},
-
 		"other": {
 			"bulletPoint": "`•`",
 			"githubRepo": "https://github.com/MauritsWilke/BedwarsGuildBot"
 		}
-    },
-
-    "changelog": [
+	},
+	"changelog": [
 		"+ Help Command",
 		"+ Full Command List",
 		"+ Translate",

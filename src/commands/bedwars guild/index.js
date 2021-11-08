@@ -35,13 +35,13 @@ module.exports = class extends Command {
 
 		let FKDRNeeded = '-'
 		let starNeeded = '-';
-		let star = player.achievements.bedwars_level;
-		let FKDR = player.stats.Bedwars.final_kills_bedwars / player.stats.Bedwars.final_deaths_bedwars;
+		let star = player.achievements.bedwars_level || 0;
+		let FKDR = player?.stats.Bedwars.final_kills_bedwars / player?.stats.Bedwars.final_deaths_bedwars || player?.stats.Bedwars.final_kills_bedwars || 0;
 		let index = (star * FKDR * FKDR) / 10;
 		let playerHead = `https://minotar.net/helm/${player.uuid}.png`
-		if (index < 30) {
-			starNeeded = ((30 * 10) / ((FKDR * FKDR))).toFixed(2);
-			FKDRNeeded = (Math.sqrt((30 * 10) / star)).toFixed(2);
+		if (index < 50) {
+			starNeeded = ((50 * 10) / ((FKDR * FKDR))).toFixed(2);
+			FKDRNeeded = (Math.sqrt((50 * 10) / star)).toFixed(2);
 		}
 
 		const indexEmbed = new MessageEmbed()
@@ -52,10 +52,10 @@ module.exports = class extends Command {
 				{ name: '**__Star__**', value: `\`\`\`${star}\`\`\``, inline: true },
 				{ name: '**__Needed__**', value: `\`\`\`${starNeeded}\`\`\``, inline: true },
 				{ name: '\u200B', value: '\u200B', inline: true },
-				{ name: '**__FKDR__**', value: `\`\`\`${FKDR.toFixed(2)}\`\`\``, inline: true },
+				{ name: '**__FKDR__**', value: `\`\`\`${+FKDR.toFixed(2)}\`\`\``, inline: true },
 				{ name: '**__Needed__**', value: `\`\`\`${FKDRNeeded}\`\`\``, inline: true },
 				{ name: '\u200B', value: '\u200B', inline: true },
-				{ name: '**__Index__**', value: `\`\`\`${index.toFixed(2)}\`\`\``, inline: false },
+				{ name: '**__Index__**', value: `\`\`\`${+index.toFixed(2)}\`\`\``, inline: false },
 			)
 			.setFooter(bot.name);
 		return message.channel.send({ embeds: [indexEmbed] });
